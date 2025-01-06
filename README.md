@@ -18,7 +18,7 @@ Allows you to extract two-factor authentication secret keys from Google Authenti
 - Handle various error cases and edge scenarios in your parsing logic.
 
 ## Solution
-- ProtoBuf wrapper for the to extract the data from a string
+- ProtoBuf wrapper for to extract the data from a string
 - Export the classic OTP format
 - Guard against errors with comprehensive unit-tests
 
