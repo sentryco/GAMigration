@@ -1,3 +1,5 @@
+[![Tests](https://github.com/sentryco/GAMigration/actions/workflows/Tests.yml/badge.svg)](https://github.com/sentryco/GAMigration/actions/workflows/Tests.yml)
+
 # GAMigration
 
 > Google authenticator migration
