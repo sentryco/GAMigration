@@ -13,20 +13,20 @@ Allows you to extract two-factor authentication secret keys from Google Authenti
 - iOS 17 or macOS 14 or later
 
 ## Problem
-- Obtain the correct proto3 definition used by Google Authenticator.
-- Implement a proper Proto3Parser class that understands this specific format.
-- Handle various error cases and edge scenarios in your parsing logic.
+- Acquire the accurate proto3 schema utilized by Google Authenticator for compatibility.
+- Develop a dedicated Proto3Parser class tailored to interpret this unique schema.
+- Incorporate comprehensive error management to address potential parsing exceptions and atypical cases.
 
 ## Solution
-- ProtoBuf wrapper for to extract the data from a string
-- Export the classic OTP format
-- Guard against errors with comprehensive unit-tests
+- A ProtoBuf wrapper to extract data from strings efficiently
+- Capability to export data in the widely-used OTP format
+- Robust error handling ensured by extensive unit testing
 
 ## Features
-- Parse and decrypt Google Authenticator migration payloads.
-- Support for multiple OTP types and algorithms.
-- Comprehensive error handling for various edge cases.
-- Unit tests to ensure reliability and correctness.
+- Efficient parsing and decryption of Google Authenticator migration payloads.
+- Extensive support for a variety of OTP types and cryptographic algorithms.
+- Thorough error handling to gracefully manage a wide range of potential edge cases.
+- Rigorous unit testing to validate functionality and ensure the integrity of the solution.
 
 ## Installation
 To integrate GAMigration into your Xcode project using Swift Package Manager, specify it in your `Package.swift` file:
