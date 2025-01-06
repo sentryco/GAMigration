@@ -106,6 +106,7 @@ Protocol buffers are Google’s language-neutral, platform-neutral, extensible m
 - Has instructions regarding how to export via terminal: https://zwyx.dev/blog/google-authenticator-export-format
 - Android: https://alexbakker.me/post/parsing-google-auth-export-qr-code.html
 - Broser extractor: https://git.coolaj86.com/coolaj86/browser-authenticator.js
+- Multiple export formats from various apps: https://github.com/scito/extract_otp_secrets
 
 ## Discussions: 
 - https://www.reddit.com/r/PrivacyGuides/comments/107det6/export_google_authenticator_otp_to_alternative/
@@ -118,7 +119,6 @@ Protocol buffers are Google’s language-neutral, platform-neutral, extensible m
 - https://stackoverflow.com/questions/73096833/how-long-is-a-google-authenticator-export-valid-and-can-it-be-used-imported-mult
 - https://discussions.apple.com/thread/255767275
 - https://support.google.com/accounts/thread/104921269/import-export-authenticator-accounts-on-ios-devices?hl=en
-- https://github.com/scito/extract_otp_secrets
 - https://fsw.teamdynamix.com/TDClient/2031/Portal/KB/ArticleDet?ID=162941
 - https://swiftpackageindex.com/svyatoynick/GAuthSwiftParser
 - https://help.roboform.com/hc/en-us/articles/21974113261197-How-to-Import-TOTP-QR-Codes-from-Google-Authenticator-into-RoboForm-iOS
