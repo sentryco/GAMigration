@@ -58,20 +58,6 @@ if let decrypted = try? GAExtractor.parseMigrationURI(input: stringFromGoogleAut
 > [!IMPORTANT]
 > Implement proper error handling in the calling code to handle edge cases
 
-## Implementation Steps
-
-1. Parse the QR code data:
-The QR code contains a URI with the format otpauth-migration://offline?data=.... The data parameter is a base64 encoded Protobuf message.
-
-2. Decode the Protobuf message:
-Use the GAuthDecrypt library to decode the Protobuf message and extract the OTP parameters.
-
-3. Process the OTP parameters:
-The decoded message contains a list of OtpParameters, which include fields such as secret, name, issuer, algorithm, and digit count
-
-> [!NOTE]
-> Use Swift's built-in URL and Data handling methods for parsing the initial parts of the QR code
-
 ## Dependencies:
 
 The following dependencies are used in the package:
@@ -85,6 +71,9 @@ The following dependencies are used in the package:
   - Version: 0.9.0 or later
 
 These dependencies are managed by the Swift Package Manager (SPM) and are defined in the `Package.swift` file of the project.
+
+> [!NOTE]
+> Use Swift's built-in URL and Data handling methods for parsing the initial parts of the QR code
 
 ## What Are Protocol Buffers?
 
