@@ -37,12 +37,12 @@ final class GAuthDecryptTests: XCTestCase {
     * This test case is reserved for future use.
     */
    func testGAuthDecryptSingleAccount() {
-      let input = "otpauth-migration://offline?data=CjEKCkhlbGxvId6tvu8SGEV4YW1wbGU6YWxpY2VAZ29vZ2xlLmNvbRoHRXhhbXBsZTAC"
+      let input = "otpauth-migration://offline?data=CjEKCkhlbGxvId6tvu8SGEV4YW1wbGU6c2FtQG9wZW5haS5jb20aB0V4YW1wbGUwAg"
       
       do {
          let gauth = try GAExtractor.parseMigrationURI(input: input)
          XCTAssertEqual(gauth.count, 1, "Expected exactly one account to be decrypted")
-         XCTAssertEqual(gauth.first?.name, "Example:alice@google.com", "Decrypted account name does not match")
+         XCTAssertEqual(gauth.first?.name, "Example:sam@openai.com", "Decrypted account name does not match")
       } catch {
          XCTFail("Decryption failed with error: \(error)")
       }

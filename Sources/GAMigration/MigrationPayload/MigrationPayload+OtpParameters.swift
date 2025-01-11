@@ -43,10 +43,9 @@ extension MigrationPayload {
       var unknownFields = SwiftProtobuf.UnknownStorage()
    }
 }
-
-/*
- Conforms MigrationPayload.OtpParameters to Sendable without compiler-enforced checks.
- OtpParameters should be designed to be safely shareable across concurrency domains.
- - Fixme: ⚠️️ the below might not be needed
-*/
+/**
+ * Conforms MigrationPayload.OtpParameters to Sendable without compiler-enforced checks.
+ * OtpParameters should be designed to be safely shareable across concurrency domains.
+ * - Fixme: ⚠️️ the below might not be needed
+ */
 extension MigrationPayload.OtpParameters: @unchecked Sendable {}

@@ -37,14 +37,12 @@ extension MigrationPayload.Algorithm {
     * Represents the raw value type for the algorithm cases.
     */
    typealias RawValue = Int
-   
    /**
     * Initializes the algorithm as invalid by default.
     */
    init() {
       self = .algoInvalid
    }
-   
    /**
     * Initializes the algorithm with a raw value, falling back to `UNRECOGNIZED` for undefined values.
     * - Parameter rawValue: The raw integer value to initialize the algorithm case.
@@ -56,7 +54,6 @@ extension MigrationPayload.Algorithm {
       default: self = .UNRECOGNIZED(rawValue)
       }
    }
-   
    /**
     * The raw integer value associated with the algorithm case.
     */
@@ -82,7 +79,6 @@ extension MigrationPayload.Algorithm: CaseIterable {
       .algoSha1,
    ]
 }
-
 /**
  * Provides protobuf name mappings for `MigrationPayload.Algorithm`.
  */
@@ -95,7 +91,6 @@ extension MigrationPayload.Algorithm: SwiftProtobuf._ProtoNameProviding {
       1: .same(proto: "ALGO_SHA1"),
    ]
 }
-
 /**
  * Conforms MigrationPayload.Algorithm to Sendable without compiler-enforced checks.
  * Ensure that Algorithm is safe to use across different threads.

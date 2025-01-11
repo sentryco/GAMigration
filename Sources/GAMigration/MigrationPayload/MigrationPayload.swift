@@ -31,14 +31,17 @@ struct MigrationPayload {
     */
    var unknownFields = SwiftProtobuf.UnknownStorage()
 }
-
-// The following struct is used to ensure compatibility with the generated code from the `protoc` Swift plug-in.
-// If there is a version mismatch, the compiler will emit an error.
+/**
+ * The following struct is used to ensure compatibility with the generated code from the `protoc` Swift plug-in.
+ * If there is a version mismatch, the compiler will emit an error.
+ */
 fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAPIVersionCheck {
    struct _2: SwiftProtobuf.ProtobufAPIVersion_2 {}
    typealias Version = _2
 }
-
-// Conforms MigrationPayload to Sendable without compiler-enforced checks.
-// This should only be used if MigrationPayload is immutable or properly encapsulates its mutable state.
+/**
+ * Conforms MigrationPayload to Sendable without compiler-enforced checks.
+ * This should only be used if MigrationPayload is immutable or properly encapsulates its mutable state.
+ * - Fixme: ⚠️️ the below might not be needed
+ */
 extension MigrationPayload: @unchecked Sendable {}
