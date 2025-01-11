@@ -78,12 +78,6 @@ final class GAuthDecryptTests: XCTestCase {
    }
 }
 extension GAuthDecryptTests {
-   // Test that the GAExtractor throws an error when the data parameter is empty
-// func testParsingEmptyData() {
-//     XCTAssertThrowsError(try GAExtractor.parseMigrationURI(input: "otpauth-migration://offline?data=")) { error in
-//         XCTAssertEqual(error as? GAError, .incorrectInput, "Expected .incorrectInput error for empty data")
-//     }
-// }
 // Test that the GAExtractor throws an error when the data parameter is not valid Base64
 func testParsingInvalidBase64Data() {
     XCTAssertThrowsError(try GAExtractor.parseMigrationURI(input: "otpauth-migration://offline?data=INVALID_BASE64")) { error in

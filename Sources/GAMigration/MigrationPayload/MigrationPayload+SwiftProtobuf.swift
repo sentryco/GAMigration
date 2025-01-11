@@ -46,10 +46,19 @@ extension MigrationPayload: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
       if !self.otpParameters.isEmpty {
          try visitor.visitRepeatedMessageField(value: self.otpParameters, fieldNumber: 1)
       }
-      try visitIfNonDefault(&visitor, value: self.version, fieldNumber: 2)
-      try visitIfNonDefault(&visitor, value: self.batchSize, fieldNumber: 3)
-      try visitIfNonDefault(&visitor, value: self.batchIndex, fieldNumber: 4)
-      try visitIfNonDefault(&visitor, value: self.batchID, fieldNumber: 5)
+
+      // Iterate over the fields and visit them if they are non-default.
+      let fields: [(value: Int32, fieldNumber: Int)] = [
+          (self.version, 2),
+          (self.batchSize, 3),
+          (self.batchIndex, 4),
+          (self.batchID, 5)
+      ]
+
+      for (value, fieldNumber) in fields {
+          try visitIfNonDefault(&visitor, value: value, fieldNumber: fieldNumber)
+      }
+
       try unknownFields.traverse(visitor: &visitor)
    }
    /**
@@ -133,24 +142,28 @@ extension MigrationPayload.OtpParameters: SwiftProtobuf.Message, SwiftProtobuf._
     * - Parameter visitor: The visitor to use for traversing the fields.
     */
    func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-       let fieldsToVisit = [
-           (condition: !self.secret.isEmpty, visit: { try visitor.visitSingularBytesField(value: self.secret, fieldNumber: 1) }),
-           (condition: !self.name.isEmpty, visit: { try visitor.visitSingularStringField(value: self.name, fieldNumber: 2) }),
-           (condition: !self.issuer.isEmpty, visit: { try visitor.visitSingularStringField(value: self.issuer, fieldNumber: 3) }),
-           (condition: self.algorithm != .algoInvalid, visit: { try visitor.visitSingularEnumField(value: self.algorithm, fieldNumber: 4) }),
-           (condition: self.digits != 0, visit: { try visitor.visitSingularInt32Field(value: self.digits, fieldNumber: 5) }),
-           (condition: self.type != .otpInvalid, visit: { try visitor.visitSingularEnumField(value: self.type, fieldNumber: 6) }),
-           (condition: self.counter != 0, visit: { try visitor.visitSingularInt64Field(value: self.counter, fieldNumber: 7) })
-       ]
-       
-       // Iterate over each field and visit if the condition is met
-       for field in fieldsToVisit {
-           if field.condition {
-               try field.visit()
-           }
-       }
-       // Traverse any unknown fields
-       try unknownFields.traverse(visitor: &visitor)
+      if !self.secret.isEmpty {
+         try visitor.visitSingularBytesField(value: self.secret, fieldNumber: 1)
+      }
+      if !self.name.isEmpty {
+         try visitor.visitSingularStringField(value: self.name, fieldNumber: 2)
+      }
+      if !self.issuer.isEmpty {
+         try visitor.visitSingularStringField(value: self.issuer, fieldNumber: 3)
+      }
+      if self.algorithm != .algoInvalid {
+         try visitor.visitSingularEnumField(value: self.algorithm, fieldNumber: 4)
+      }
+      if self.digits != 0 {
+         try visitor.visitSingularInt32Field(value: self.digits, fieldNumber: 5)
+      }
+      if self.type != .otpInvalid {
+         try visitor.visitSingularEnumField(value: self.type, fieldNumber: 6)
+      }
+      if self.counter != 0 {
+         try visitor.visitSingularInt64Field(value: self.counter, fieldNumber: 7)
+      }
+      try unknownFields.traverse(visitor: &visitor)
    }
    /**
     * Compares two instances of `OtpParameters` for equality.
