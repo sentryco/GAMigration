@@ -1,6 +1,7 @@
 import Foundation
 /**
  * An enumeration that defines the possible errors that can occur during the Google Authenticator migration process.
+ * - Fixme: ⚠️️ add .unsupportedFeature
  */
 public enum GAError: Error {
    /**

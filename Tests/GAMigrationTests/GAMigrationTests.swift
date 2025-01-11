@@ -37,12 +37,11 @@ final class GAuthDecryptTests: XCTestCase {
     * This test case is reserved for future use.
     */
    func testGAuthDecryptSingleAccount() {
-      let input = "otpauth-migration://offline?data=CjEKCkhlbGxvId6tvu8SGEV4YW1wbGU6c2FtQG9wZW5haS5jb20aB0V4YW1wbGUwAg"
-      
+      let input = "otpauth-migration://offline?data=CjEKCkhlbGxvId6tvu8SGEV4YW1wbGU6YWxpY2VAZ29vZ2xlLmNvbRoHRXhhbXBsZTAC"
       do {
          let gauth = try GAExtractor.parseMigrationURI(input: input)
          XCTAssertEqual(gauth.count, 1, "Expected exactly one account to be decrypted")
-         XCTAssertEqual(gauth.first?.name, "Example:sam@openai.com", "Decrypted account name does not match")
+         XCTAssertEqual(gauth.first?.name, "Example:alice@google.com", "Decrypted account name does not match")
       } catch {
          XCTFail("Decryption failed with error: \(error)")
       }
@@ -77,4 +76,41 @@ final class GAuthDecryptTests: XCTestCase {
          XCTAssertEqual(error as? GAError, .cannotDecrypt, "Expected .cannotDecrypt error type")
       }
    }
+}
+extension GAuthDecryptTests {
+   // Test that the GAExtractor throws an error when the data parameter is empty
+// func testParsingEmptyData() {
+//     XCTAssertThrowsError(try GAExtractor.parseMigrationURI(input: "otpauth-migration://offline?data=")) { error in
+//         XCTAssertEqual(error as? GAError, .incorrectInput, "Expected .incorrectInput error for empty data")
+//     }
+// }
+// Test that the GAExtractor throws an error when the data parameter is not valid Base64
+func testParsingInvalidBase64Data() {
+    XCTAssertThrowsError(try GAExtractor.parseMigrationURI(input: "otpauth-migration://offline?data=INVALID_BASE64")) { error in
+        XCTAssertEqual(error as? GAError, .incorrectInput, "Expected .incorrectInput error for invalid Base64 data")
+    }
+}
+   // Test that the GAExtractor throws an error when the data is valid Base64 but not a valid payload
+   func testParsingInvalidPayload() {
+      let invalidPayload = Data("invalidpayload".utf8).base64EncodedString()
+      XCTAssertThrowsError(try GAExtractor.parseMigrationURI(input: "otpauth-migration://offline?data=\(invalidPayload)")) { error in
+         XCTAssertEqual(error as? GAError, .cannotDecrypt, "Expected .cannotDecrypt error for invalid payload")
+      }
+   }
+   // Test that the GAExtractor throws an error when the payload format is incorrect
+   func testParsingIncorrectPayloadFormat() {
+      // You would need to create a valid base64 string that decodes to an incorrect format for the payload
+      let incorrectFormatPayload = "..." // Replace with actual base64 string
+      XCTAssertThrowsError(try GAExtractor.parseMigrationURI(input: "otpauth-migration://offline?data=\(incorrectFormatPayload)")) { error in
+         XCTAssertEqual(error as? GAError, .incorrectInput, "Expected .incorrectInput error for incorrect payload format")
+      }
+   }
+   // Test that the GAExtractor throws an error when encountering unsupported features
+//   func testParsingUnsupportedFeatures() {
+//      // You would need to create a valid base64 string that decodes to a payload with unsupported features
+//      let unsupportedFeaturesPayload = "..." // Replace with actual base64 string
+//      XCTAssertThrowsError(try GAExtractor.parseMigrationURI(input: "otpauth-migration://offline?data=\(unsupportedFeaturesPayload)")) { error in
+//         XCTAssertEqual(error as? GAError, .unsupportedFeature, "Expected .unsupportedFeature error for unsupported features in payload")
+//      }
+//   }
 }
