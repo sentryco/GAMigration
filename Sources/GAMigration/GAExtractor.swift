@@ -25,20 +25,37 @@ extension GAExtractor {
     * - Parameter input: The migration URI string to be processed.
     * - Returns: A `Data` object representing the decoded base64 payload from the URI.
     * - Throws: `GAError.incorrectInput` if the URI is not properly formatted or the payload cannot be decoded.
+    * - Fixme: ⚠️️ Make more granular errors
     */
    private static func decodeMigrationUriToData(input: String) throws -> Data {
-      guard input.starts(with: "otpauth-migration://"),
-            let url = URL(string: input),
-            let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
-            let queryItems = components.queryItems else {
-         throw GAError.incorrectInput
-      }
-      guard let encodedData = queryItems.first?.value?
-         .replacingOccurrences(of: " ", with: "+"),
-            let decodedData = Data(base64Encoded: encodedData) else {
-         throw GAError.incorrectInput
-      }
-      return decodedData
+       // Verify that the input starts with the required scheme
+       guard input.starts(with: "otpauth-migration://") else {
+           throw GAError.incorrectInput
+       }
+
+       // Create a URL from the input string
+       guard let url = URL(string: input) else {
+           throw GAError.incorrectInput
+       }
+
+       // Break the URL into components to access the query parameters
+       guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
+             let queryItems = components.queryItems else {
+           throw GAError.incorrectInput
+       }
+
+       // Extract the 'data' query parameter value
+       guard let encodedData = queryItems.first(where: { $0.name == "data" })?.value else {
+           throw GAError.incorrectInput
+       }
+
+       // Replace spaces with '+' in the encoded data and decode from base64
+       let sanitizedData = encodedData.replacingOccurrences(of: " ", with: "+")
+       guard let decodedData = Data(base64Encoded: sanitizedData) else {
+           throw GAError.incorrectInput
+       }
+
+       return decodedData
    }
    /**
     * Decodes the given data into a `MigrationPayload` and maps it to an array of `GAOtp` instances.
