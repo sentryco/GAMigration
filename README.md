@@ -5,7 +5,7 @@
 > Google authenticator migration
 
 ## Description:
-Allows you to extract two-factor authentication secret keys from Google Authenticator export QR codes
+Enables you to extract two-factor authentication secret keys from QR codes exported by Google Authenticator
 
 ## Prerequisites
 
@@ -13,20 +13,20 @@ Allows you to extract two-factor authentication secret keys from Google Authenti
 - iOS 17 or macOS 14 or later
 
 ## Problem
-- Acquire the accurate proto3 schema utilized by Google Authenticator for compatibility.
-- Develop a dedicated Proto3Parser class tailored to interpret this unique schema.
-- Incorporate comprehensive error management to address potential parsing exceptions and atypical cases.
+- Obtain the precise proto3 schema used by Google Authenticator to ensure compatibility.
+- Create a specialized `Proto3Parser` class designed to interpret this specific schema.
+- Implement comprehensive error handling to address parsing exceptions and edge cases.
 
 ## Solution
-- A ProtoBuf wrapper to extract data from strings efficiently
-- Capability to export data in the widely-used OTP format
-- Robust error handling ensured by extensive unit testing
+- Efficient data extraction from strings using a ProtoBuf wrapper.
+- Support for exporting data in the widely used OTP format.
+- Robust error handling, ensured through comprehensive unit testing.
 
 ## Features
-- Efficient parsing and decryption of Google Authenticator migration payloads.
-- Extensive support for a variety of OTP types and cryptographic algorithms.
-- Thorough error handling to gracefully manage a wide range of potential edge cases.
-- Rigorous unit testing to validate functionality and ensure the integrity of the solution.
+- Efficiently parses and decrypts Google Authenticator migration payloads.
+- Supports a wide variety of OTP types and cryptographic algorithms.
+- Provides comprehensive error handling to gracefully handle a broad range of edge cases.
+- Utilizes rigorous unit testing to validate functionality and ensure the solution's integrity.
 
 ## Installation
 To integrate GAMigration into your Xcode project using Swift Package Manager, specify it in your `Package.swift` file:
