@@ -78,12 +78,12 @@ final class GAuthDecryptTests: XCTestCase {
    }
 }
 extension GAuthDecryptTests {
-// Test that the GAExtractor throws an error when the data parameter is not valid Base64
-func testParsingInvalidBase64Data() {
-    XCTAssertThrowsError(try GAExtractor.parseMigrationURI(input: "otpauth-migration://offline?data=INVALID_BASE64")) { error in
-        XCTAssertEqual(error as? GAError, .incorrectInput, "Expected .incorrectInput error for invalid Base64 data")
-    }
-}
+   // Test that the GAExtractor throws an error when the data parameter is not valid Base64
+   func testParsingInvalidBase64Data() {
+      XCTAssertThrowsError(try GAExtractor.parseMigrationURI(input: "otpauth-migration://offline?data=INVALID_BASE64")) { error in
+         XCTAssertEqual(error as? GAError, .incorrectInput, "Expected .incorrectInput error for invalid Base64 data")
+      }
+   }
    // Test that the GAExtractor throws an error when the data is valid Base64 but not a valid payload
    func testParsingInvalidPayload() {
       let invalidPayload = Data("invalidpayload".utf8).base64EncodedString()
@@ -99,7 +99,8 @@ func testParsingInvalidBase64Data() {
          XCTAssertEqual(error as? GAError, .incorrectInput, "Expected .incorrectInput error for incorrect payload format")
       }
    }
-   // Test that the GAExtractor throws an error when encountering unsupported features
+}
+// Test that the GAExtractor throws an error when encountering unsupported features
 //   func testParsingUnsupportedFeatures() {
 //      // You would need to create a valid base64 string that decodes to a payload with unsupported features
 //      let unsupportedFeaturesPayload = "..." // Replace with actual base64 string
@@ -107,4 +108,3 @@ func testParsingInvalidBase64Data() {
 //         XCTAssertEqual(error as? GAError, .unsupportedFeature, "Expected .unsupportedFeature error for unsupported features in payload")
 //      }
 //   }
-}
