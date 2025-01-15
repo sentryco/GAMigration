@@ -8,6 +8,8 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+  schedule:
+    - cron: '0 0 * * *' # Runs every day at midnight
 
 jobs:
   build:
@@ -16,6 +18,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+    - name: Wait for Random Time
+      if: github.event_name == 'schedule'
+      shell: bash
+      run: |
+        RANDOM_DELAY=$(( RANDOM % 86400 ))
+        echo "Waiting for $RANDOM_DELAY seconds"
+        sleep $RANDOM_DELAY
     - name: Build
       run: swift build -v
     - name: Run tests
